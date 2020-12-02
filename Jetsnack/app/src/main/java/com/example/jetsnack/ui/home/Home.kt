@@ -71,6 +71,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import androidx.ui.tooling.preview.Preview
 import com.example.jetsnack.R
 import com.example.jetsnack.ui.components.JetsnackScaffold
@@ -105,7 +106,7 @@ fun Home(onSnackSelected: (Long) -> Unit) {
         val modifier = Modifier.padding(innerPadding)
         NavHost(navController, startDestination = HomeSections.startDestination.route) {
             composable(HomeSections.Feed.route) { Feed(onSnackSelected, modifier) }
-            composable(HomeSections.Search.route) { Search(onSnackSelected, modifier) }
+            composable(HomeSections.Search.route, deepLinks = listOf(navDeepLink { uriPattern = "example://gizmos/feed" })) { Search(onSnackSelected, modifier) }
             composable(HomeSections.Cart.route) { Cart(onSnackSelected, modifier) }
             composable(HomeSections.Profile.route) { Profile(modifier) }
         }
